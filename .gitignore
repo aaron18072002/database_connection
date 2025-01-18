@@ -1,0 +1,52 @@
+# Ignore target directories in all Maven projects
+**/target/
+
+# Ignore Maven-specific files
+**/.mvn/
+**/.mvn/wrapper/maven-wrapper.jar
+**/dependency-reduced-pom.xml
+**/release.properties
+
+# Ignore IDE-specific files for all projects
+**/.project
+**/.classpath
+**/.settings/
+**/.idea/
+**/*.iml
+**/out/
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.bak
+*~
+
+# Ignore logs
+**/*.log
+
+# Ignore archives and package files
+**/*.jar
+**/*.war
+**/*.ear
+
+# Ignore environment configuration files
+**/.env
+
+# Ignore Eclipse metadata (common issue with multi-project workspaces)
+**/.metadata/
+**/.metadata/**
+
+# Ignore temporary or build-related files
+**/build/
+**/.tmp/
+**/.cache/
+
+# Ignore binary files
+**/*.class
+**/*.exe
+**/*.dll
+
+# Ignore node_modules (if using any front-end tools)
+**/node_modules/
