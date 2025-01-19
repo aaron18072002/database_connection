@@ -12,4 +12,11 @@ public interface ItemGroupDao {
 	 */
 	List<ItemGroup> getAll();
 	
+	/**
+	 * Get unique {@link ItemGroup} with given id
+	 * @param id the id
+	 * @return available {@link ItemGroup} or null if not exist
+	 */ 
+	ItemGroup get(Integer id);
+	
 }
