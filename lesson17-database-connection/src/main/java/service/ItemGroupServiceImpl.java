@@ -31,5 +31,11 @@ public class ItemGroupServiceImpl implements ItemGroupService {
 		Objects.requireNonNull(itemGroup, "item group should not be null");
 		this.itemGroupDao.save(itemGroup);
 	}
+	
+	@Override
+	public void update(ItemGroup itemGroup) {
+		Objects.requireNonNull(itemGroup, "item group should not be null");
+		this.itemGroupDao.update(itemGroup);
+	}
 
 }

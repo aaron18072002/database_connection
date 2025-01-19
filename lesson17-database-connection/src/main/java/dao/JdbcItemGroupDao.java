@@ -22,6 +22,12 @@ public class JdbcItemGroupDao implements ItemGroupDao {
 				INSERT INTO t02_item_group(C02_ITEM_GROUP_NAME)
 				VALUES (?);
 			""";
+	private static final String Q_UPDATE_INTO_ITEM_GROUP =
+			"""
+				UPDATE t02_item_group
+				SET C02_ITEM_GROUP_NAME = ?
+				WHERE C02_ITEM_GROUP_ID = ?;
+			""";
 	
 	private Connection connection;
 	private Statement st;
@@ -80,6 +86,20 @@ public class JdbcItemGroupDao implements ItemGroupDao {
 			pst = this.connection.prepareStatement(Q_INSERT_INTO_ITEM_GROUP); // sql có tham số
 			pst.setString(1, itemGroup.getName()); // set giá trị cho tham số
 			pst.executeUpdate(); // thực thi câu sql của pst
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			SqlUtils.close(pst);
+		}
+	}
+	
+	@Override
+	public void update(ItemGroup itemGroup) {
+		try {
+			pst = this.connection.prepareStatement(Q_UPDATE_INTO_ITEM_GROUP); 
+			pst.setString(1, itemGroup.getName()); 
+			pst.setInt(2, itemGroup.getId());
+			pst.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

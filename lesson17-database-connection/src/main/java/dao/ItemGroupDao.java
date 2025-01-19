@@ -27,4 +27,18 @@ public interface ItemGroupDao {
 	 */
 	void save(ItemGroup itemGroup);
 	
+	/**
+	 * Update item group
+	 * @param itemGroup
+	 * throw SQLIntegrityConstraintViolationException if group name is overlapped
+	 * TODO: need validate before updating...
+	 */
+	void update(ItemGroup itemGroup);
+	
+	/**
+	 * Save Or Update item group
+	 * @param itemGroup
+	 */
+	void saveOrUpdate(ItemGroup itemGroup);
+	
 }
