@@ -19,4 +19,12 @@ public interface ItemGroupDao {
 	 */ 
 	ItemGroup get(Integer id);
 	
+	/**
+	 * Save group to database
+	 * @param itemGroup
+	 * throw SQLIntegrityConstraintViolationException if group name is overlapped
+	 * TODO: need validate before saving...
+	 */
+	void save(ItemGroup itemGroup);
+	
 }

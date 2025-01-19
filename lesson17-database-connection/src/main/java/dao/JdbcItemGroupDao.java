@@ -17,6 +17,11 @@ public class JdbcItemGroupDao implements ItemGroupDao {
 	private static final String Q_GET_ALL = "SELECT * FROM t02_item_group";
 	private static final String Q_GET_ITEM_GROUP_BY_ID =
 			"SELECT * FROM t02_item_group WHERE C02_ITEM_GROUP_ID = ?";
+	private static final String Q_INSERT_INTO_ITEM_GROUP =
+			"""
+				INSERT INTO t02_item_group(C02_ITEM_GROUP_NAME)
+				VALUES (?);
+			""";
 	
 	private Connection connection;
 	private Statement st;
@@ -67,6 +72,19 @@ public class JdbcItemGroupDao implements ItemGroupDao {
 		}
 		
 		return itemGroup;
+	}
+	
+	@Override
+	public void save(ItemGroup itemGroup) {
+		try {
+			pst = this.connection.prepareStatement(Q_INSERT_INTO_ITEM_GROUP); // sql có tham số
+			pst.setString(1, itemGroup.getName()); // set giá trị cho tham số
+			pst.executeUpdate(); // thực thi câu sql của pst
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			SqlUtils.close(pst);
+		}
 	}
 
 }

@@ -10,6 +10,10 @@ public class ItemGroup {
 	public ItemGroup() {
 		
 	}
+	
+	public ItemGroup(String name) {
+		this.name = name;
+	}
 
 	public ItemGroup(Integer id, String name) {
 		super();

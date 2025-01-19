@@ -5,6 +5,8 @@ import service.ItemGroupServiceImpl;
 
 import static utils.PrintUtils.*;
 
+import persistence.ItemGroup;
+
 public class Ex02ItemGroupView {
 	
 	private static ItemGroupService itemGroupService;
@@ -19,6 +21,10 @@ public class Ex02ItemGroupView {
 		
 		genarate("2. Liệt kê loại hàng có mã = 4",
 				itemGroupService.get(4));
+		
+		System.out.println("3. Thêm mới loại hàng\n");
+		itemGroupService.save(new ItemGroup("Móc treo quần áo"));
+		
 	}
 	
 }
