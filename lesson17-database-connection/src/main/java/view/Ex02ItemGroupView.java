@@ -5,6 +5,8 @@ import service.ItemGroupServiceImpl;
 
 import static utils.PrintUtils.*;
 
+import java.util.List;
+
 import persistence.ItemGroup;
 
 public class Ex02ItemGroupView {
@@ -25,11 +27,23 @@ public class Ex02ItemGroupView {
 		genarate("2. Liệt kê loại hàng có mã = 4",
 				itemGroupService.get(4));
 		
-//		System.out.println("3. Thêm mới loại hàng\n");
-//		itemGroupService.save(new ItemGroup("Móc treo quần áo"));
+		System.out.println("3. Thêm mới loại hàng\n");
+		itemGroupService.merge(new ItemGroup("Balo học sinh"));
 		
 		System.out.println("\n4. Cập nhật loại hàng\n");
-		itemGroupService.update(new ItemGroup(1,"Áo em bé"));
+		itemGroupService.merge(new ItemGroup(1,"Áo cho em bé"));
+		
+		System.out.println("\n5. Liệt kê loại hàng có tên loại = \"Quần\"\n");
+		itemGroupService.get("Quần");
+		
+		// Thêm N phần tử
+		// Nếu 1/x phần tử lỗi --> các phần tử còn lại vẫn đc thêm
+		// yêu cầu: nếu tồn tại 1 loại hàng lỗi --> rollback
+		System.out.println("\n6. Thêm mới N loại hàng\n");
+		itemGroupService.save(List.of(
+					new ItemGroup("Loại hàng G1"),
+					new ItemGroup("Loại hàng G2")
+				));
 		
 		System.out.println("\n=======================================\n");
 		System.out.println("Kết thúc chương trình");

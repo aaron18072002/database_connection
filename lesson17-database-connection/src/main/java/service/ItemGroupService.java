@@ -20,6 +20,13 @@ public interface ItemGroupService {
 	ItemGroup get(Integer id);
 	
 	/**
+	 * Get unique {@link ItemGroup} with given name
+	 * @param name the name
+	 * @return available {@link ItemGroup} or null if not exist
+	 */ 
+	ItemGroup get(String name);
+	
+	/**
 	 * Save group to database
 	 * @param itemGroup
 	 * throw SQLIntegrityConstraintViolationException if group name is overlapped
@@ -28,11 +35,31 @@ public interface ItemGroupService {
 	void save(ItemGroup itemGroup);
 	
 	/**
+	 * Save groups to database
+	 * @param itemGroups the itemGroups
+	 * throw SQLIntegrityConstraintViolationException if group name is overlapped
+	 * TODO: need validate before saving...
+	 */
+	void save(List<ItemGroup> itemGroups);
+	
+	/**
 	 * Update item group
 	 * @param itemGroup
 	 * throw SQLIntegrityConstraintViolationException if group name is overlapped
 	 * TODO: need validate before updating...
 	 */
 	void update(ItemGroup itemGroup);
+	
+	/**
+	 * Save Or Update item group
+	 * @param itemGroup
+	 */
+	void saveOrUpdate(ItemGroup itemGroup);
+	
+	/**
+	 * Merge item group
+	 * @param itemGroup
+	 */
+	void merge(ItemGroup itemGroup);
 	
 }

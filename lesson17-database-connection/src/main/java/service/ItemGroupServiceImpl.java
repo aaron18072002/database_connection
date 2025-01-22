@@ -27,15 +27,47 @@ public class ItemGroupServiceImpl implements ItemGroupService {
 	}
 	
 	@Override
+	public ItemGroup get(String name) {
+		Objects.requireNonNull(name, "group name should not be null");
+		ItemGroup itemGroup = this.itemGroupDao.get(name);
+		return itemGroup;
+	}
+	
+	@Override
 	public void save(ItemGroup itemGroup) {
 		Objects.requireNonNull(itemGroup, "item group should not be null");
 		this.itemGroupDao.save(itemGroup);
 	}
 	
 	@Override
+	public void save(List<ItemGroup> itemGroups) {
+		if(itemGroups == null || itemGroups.isEmpty()) {
+			throw new IllegalArgumentException("Parameter 'groups' is invalid...");
+		}
+		this.itemGroupDao.save(itemGroups);;
+	}
+	
+	@Override
 	public void update(ItemGroup itemGroup) {
 		Objects.requireNonNull(itemGroup, "item group should not be null");
 		this.itemGroupDao.update(itemGroup);
+	}
+
+	@Override
+	public void saveOrUpdate(ItemGroup itemGroup) {
+		Objects.requireNonNull(itemGroup, "item group should not be null");
+		if(this.get(itemGroup.getName()) == null) {			
+			this.itemGroupDao.save(itemGroup);
+		} else {		
+			// should be throw exception
+			System.out.println(">>> Exp: Group " + itemGroup.getName() + " has existed!");
+		}
+	}
+	
+	@Override
+	public void merge(ItemGroup itemGroup) {
+		Objects.requireNonNull(itemGroup, "item group should not be null");
+		this.itemGroupDao.merge(itemGroup);
 	}
 
 }
