@@ -5,8 +5,6 @@ import service.ItemGroupServiceImpl;
 
 import static utils.PrintUtils.*;
 
-import java.util.List;
-
 import persistence.ItemGroup;
 
 public class Ex02ItemGroupView {
@@ -39,11 +37,11 @@ public class Ex02ItemGroupView {
 		// Thêm N phần tử
 		// Nếu 1/x phần tử lỗi --> các phần tử còn lại vẫn đc thêm
 		// yêu cầu: nếu tồn tại 1 loại hàng lỗi --> rollback
-		System.out.println("\n6. Thêm mới N loại hàng\n");
-		itemGroupService.save(List.of(
-					new ItemGroup("Loại hàng G1"),
-					new ItemGroup("Loại hàng G2")
-				));
+//		System.out.println("\n6. Thêm mới N loại hàng\n");
+//		itemGroupService.save(List.of(
+//					new ItemGroup("Loại hàng G1"),
+//					new ItemGroup("Loại hàng G2")
+//				));
 		
 		System.out.println("\n=======================================\n");
 		System.out.println("Kết thúc chương trình");

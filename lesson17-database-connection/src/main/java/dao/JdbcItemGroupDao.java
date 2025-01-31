@@ -1,20 +1,15 @@
 package dao;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import connection.DbConnection;
+import dao.base.GenericDao;
 import persistence.ItemGroup;
 import utils.SqlUtils;
 
-public class JdbcItemGroupDao implements ItemGroupDao {
+public class JdbcItemGroupDao extends GenericDao implements ItemGroupDao {
 	
 	private static final String Q_GET_ALL = "SELECT * FROM t02_item_group";
 	private static final String Q_GET_ITEM_GROUP_BY_ID =
@@ -36,17 +31,6 @@ public class JdbcItemGroupDao implements ItemGroupDao {
 			"""
 				CALL mergeNewItemGroup(?,?);
 			""";
-	
-	private Connection connection;
-	private Statement st;
-	// thực thi câu sql có tham số, trước khi execute..., truyền tham số rồi mới execute
-	private PreparedStatement pst;
-	private CallableStatement cst;
-	private ResultSet rs;
-	
-	public JdbcItemGroupDao() {
-		this.connection = DbConnection.getConnection();
-	}
 
 	@Override
 	public List<ItemGroup> getAll() {
