@@ -26,13 +26,13 @@ public class Ex02ItemGroupView {
 				itemGroupService.get(4));
 		
 		System.out.println("3. Thêm mới loại hàng\n");
-		itemGroupService.merge(new ItemGroup("Balo học sinh"));
+			itemGroupService.merge(new ItemGroup("Balo học sinh"));
 		
 		System.out.println("\n4. Cập nhật loại hàng\n");
-		itemGroupService.merge(new ItemGroup(1,"Áo cho em bé"));
+			itemGroupService.merge(new ItemGroup(1,"Áo cho em bé"));
 		
 		System.out.println("\n5. Liệt kê loại hàng có tên loại = \"Quần\"\n");
-		itemGroupService.get("Quần");
+			itemGroupService.get("Quần");
 		
 		// Thêm N phần tử
 		// Nếu 1/x phần tử lỗi --> các phần tử còn lại vẫn đc thêm
@@ -44,8 +44,12 @@ public class Ex02ItemGroupView {
 //				));
 		
 		System.out.println("\n8. Liệt kê các loại hàng(kèm ds mặt hàng)");
-		itemGroupService.getGroupOfItems()
-			.forEach(g -> g.logging());
+			itemGroupService.getGroupOfItems()
+				.forEach(g -> g.logging());
+		
+		genarate(
+			"\n10. Đếm SL các mặt hàng theo từng loại hàng"
+			, itemGroupService.getItemGroupDetails());
 		
 		System.out.println("\n=======================================\n");
 		System.out.println("Kết thúc chương trình");

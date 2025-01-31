@@ -7,11 +7,23 @@ import java.util.List;
 
 import dao.base.GenericDao;
 import persistence.ItemGroup;
+import persistence.dto.ItemGroupDto;
 import utils.SqlUtils;
 
 public class JdbcItemGroupDao extends GenericDao implements ItemGroupDao {
 	
 	private static final String Q_GET_ALL = "SELECT * FROM t02_item_group";
+	private static final String Q_GET_ITEM_GROUP_DETAILS = """
+				SELECT t2.C02_ITEM_GROUP_ID AS groupId, 
+					   t2.C02_ITEM_GROUP_NAME AS groupName,
+					   COUNT(*) amountOfItems, 
+					   GROUP_CONCAT(C01_ITEM_NAME SEPARATOR ', ') AS details
+				FROM t01_item AS t1
+				JOIN t02_item_group AS t2
+				ON t1.C01_ITEM_GROUP_ID = t2.C02_ITEM_GROUP_ID
+				GROUP BY C01_ITEM_GROUP_ID 
+				HAVING amountOfItems > 2; 
+			""";
 	private static final String Q_GET_ITEM_GROUP_BY_ID =
 			"SELECT * FROM t02_item_group WHERE C02_ITEM_GROUP_ID = ?";
 	private static final String Q_GET_ITEM_GROUP_BY_NAME =
@@ -92,6 +104,28 @@ public class JdbcItemGroupDao extends GenericDao implements ItemGroupDao {
 		}
 		
 		return itemGroup;
+	}
+	
+	@Override
+	public List<ItemGroupDto> getItemGroupDetails() {
+		List<ItemGroupDto> result = new ArrayList<ItemGroupDto>();
+		try {
+			st = this.connection.createStatement();
+			rs = st.executeQuery(Q_GET_ITEM_GROUP_DETAILS);
+			while(rs.next()) {
+				Integer id = rs.getInt("groupId");
+				String name = rs.getString("groupName");
+				Integer amountOfItems = rs.getInt("amountOfItems");
+				String details = rs.getNString("details");
+				result.add(new ItemGroupDto(id, name, amountOfItems, details));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			SqlUtils.close(rs,st);
+		}
+		
+		return result;
 	}
 	
 	@Override

@@ -5,18 +5,18 @@ public class ItemGroupDto {
 	private Integer id;
 	private String name;
 	private Integer amountOfItems;
-	private String listOfItems;
+	private String details;
 	
 	public ItemGroupDto() {
 		
 	}
 
-	public ItemGroupDto(Integer id, String name, Integer amountOfItems, String listOfItems) {
+	public ItemGroupDto(Integer id, String name, Integer amountOfItems, String details) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.amountOfItems = amountOfItems;
-		this.listOfItems = listOfItems;
+		this.details = details;
 	}
 
 	public Integer getId() {
@@ -43,12 +43,12 @@ public class ItemGroupDto {
 		this.amountOfItems = amountOfItems;
 	}
 
-	public String getListOfItems() {
-		return listOfItems;
+	public String getDetails() {
+		return details;
 	}
-
-	public void setListOfItems(String listOfItems) {
-		this.listOfItems = listOfItems;
+	
+	public void setDetails(String details) {
+		this.details = details;
 	}
 	
 	@Override
@@ -68,8 +68,8 @@ public class ItemGroupDto {
 
 	@Override
 	public String toString() {
-		return "ItemGroupDto [id=" + id + ", name=" + name + ", amountOfItems=" + amountOfItems + ", listOfItems="
-				+ listOfItems + "]";
+		return "ItemGroupDto [id=" + id + ", name=" + name + ", amountOfItems=" + amountOfItems + ", details=" + details
+				+ "]";
 	}
 	
 }

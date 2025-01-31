@@ -11,6 +11,7 @@ import dao.JdbcItemDao;
 import dao.JdbcItemGroupDao;
 import persistence.Item;
 import persistence.ItemGroup;
+import persistence.dto.ItemGroupDto;
 
 public class ItemGroupServiceImpl implements ItemGroupService {
 	
@@ -49,6 +50,11 @@ public class ItemGroupServiceImpl implements ItemGroupService {
 					return itemGroup;
 				})
 				.toList();
+	}
+	
+	@Override
+	public List<ItemGroupDto> getItemGroupDetails() {
+		return this.itemGroupDao.getItemGroupDetails();
 	}
 	
 	@Override

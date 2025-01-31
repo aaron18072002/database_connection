@@ -3,6 +3,7 @@ package dao;
 import java.util.List;
 
 import persistence.ItemGroup;
+import persistence.dto.ItemGroupDto;
 
 public interface ItemGroupDao {
 
@@ -11,6 +12,12 @@ public interface ItemGroupDao {
 	 * @return List of {@link ItemGroup}
 	 */
 	List<ItemGroup> getAll();
+	
+	/**
+	 * Get details info of each item group
+	 * @return list of {@link ItemGroupDto}
+	 */
+	List<ItemGroupDto> getItemGroupDetails();
 	
 	/**
 	 * Get unique {@link ItemGroup} with given id
