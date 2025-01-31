@@ -13,6 +13,12 @@ public interface ItemGroupService {
 	List<ItemGroup> getAll();
 	
 	/**
+	 * Get all group of items
+	 * @return @return List of {@link ItemGroup}
+	 */
+	List<ItemGroup> getGroupOfItems();
+	
+	/**
 	 * Get unique {@link ItemGroup} with given id
 	 * @param id the id
 	 * @return available {@link ItemGroup} or null if not exist

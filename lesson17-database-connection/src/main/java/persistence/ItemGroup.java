@@ -1,11 +1,13 @@
 package persistence;
 
+import java.util.List;
 import java.util.Objects;
 
 public class ItemGroup {
 
 	private Integer id;
 	private String name;
+	private List<Item> items;
 	
 	public ItemGroup() {
 		
@@ -37,6 +39,14 @@ public class ItemGroup {
 		this.name = name;
 	}
 	
+	public void setItems(List<Item> items) {
+		this.items = items;
+	}
+	
+	public List<Item> getItems() {
+		return items;
+	}
+	
 	@Override
 	public boolean equals(Object o) {
 		if(this == o) {
@@ -55,6 +65,15 @@ public class ItemGroup {
 	@Override
 	public int hashCode() {
 		return Objects.hash(this.getId());
+	}
+	
+	public void logging() {
+		System.out.printf("Group(id=%s, name=%s)", this.getId(), this.getName()).println();
+		System.out.println("--------------------");
+		this.items.forEach(item -> {
+			System.out.printf("		+ Item(id=%s, name=%s)\n", item.getId(), item.getName());
+		});
+		System.out.println("\n");
 	}
 
 	@Override

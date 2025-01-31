@@ -1,18 +1,25 @@
 package service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
+import dao.ItemDao;
 import dao.ItemGroupDao;
+import dao.JdbcItemDao;
 import dao.JdbcItemGroupDao;
+import persistence.Item;
 import persistence.ItemGroup;
 
 public class ItemGroupServiceImpl implements ItemGroupService {
 	
 	private final ItemGroupDao itemGroupDao;
+	private final ItemDao itemDao;
 	
 	public ItemGroupServiceImpl() {
 		this.itemGroupDao = new JdbcItemGroupDao();
+		this.itemDao = new JdbcItemDao();
 	}
 
 	@Override
@@ -24,6 +31,24 @@ public class ItemGroupServiceImpl implements ItemGroupService {
 	public ItemGroup get(Integer id) {
 		Objects.requireNonNull(id, "group id should not be null");
 		return this.itemGroupDao.get(id);
+	}
+	
+	@Override
+	public List<ItemGroup> getGroupOfItems() {
+		List<Item> items = this.itemDao.getAll(); // item-group
+		
+		Map<ItemGroup, List<Item>> groupOfItems = items
+				.stream()
+				.collect(Collectors.groupingBy(i -> i.getItemGroup()));
+		
+		return groupOfItems.entrySet() // Set<Entry<ItemGroup, List<Item>>
+				.stream() // Stream<Entry<ItemGroup, List<Item>>
+				.map(entry -> {
+					ItemGroup itemGroup = entry.getKey();
+					itemGroup.setItems(entry.getValue());
+					return itemGroup;
+				})
+				.toList();
 	}
 	
 	@Override

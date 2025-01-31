@@ -43,6 +43,10 @@ public class Ex02ItemGroupView {
 //					new ItemGroup("Loại hàng G2")
 //				));
 		
+		System.out.println("\n8. Liệt kê các loại hàng(kèm ds mặt hàng)");
+		itemGroupService.getGroupOfItems()
+			.forEach(g -> g.logging());
+		
 		System.out.println("\n=======================================\n");
 		System.out.println("Kết thúc chương trình");
 		
