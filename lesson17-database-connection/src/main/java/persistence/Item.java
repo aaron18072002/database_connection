@@ -1,5 +1,7 @@
 package persistence;
 
+import java.util.Objects;
+
 public class Item {
 
 	private Integer id;
@@ -63,6 +65,15 @@ public class Item {
 		Item that = (Item)obj;
 		
 		return this.getId() == that.getId();
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(this.getId());
+	}
+	
+	public void logging() {
+		
 	}
 
 	@Override
